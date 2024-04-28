@@ -97,7 +97,7 @@ public final class Aura extends Module {
     public final Setting<Boolean> grimRayTrace = new Setting<>("GrimRayTrace", true).withParent(advanced);
     public final Setting<Boolean> unpressShield = new Setting<>("UnpressShield", true).withParent(advanced);
     public final Setting<Boolean> deathDisable = new Setting<>("DisableOnDeath", true).withParent(advanced);
-    public final Setting<Boolean> tpDisable = new Setting<>("TPDisable", false).withParent(advanced);
+    public final Setting<Boolean> tpDisable = new Setting<>("DisableOnTP", false).withParent(advanced);
     public final Setting<Boolean> pullDown = new Setting<>("FastFall", false).withParent(advanced);
     public final Setting<Boolean> onlyJumpBoost = new Setting<>("OnlyJumpBoost", false, v-> pullDown.getValue()).withParent(advanced);
     public final Setting<Float> pullValue = new Setting<>("PullValue", 3f, 0f, 20f, v -> pullDown.getValue()).withParent(advanced);
@@ -384,6 +384,7 @@ public final class Aura extends Module {
                         || (mc.player.isFallFlying() || ModuleManager.elytraPlus.isEnabled())
                         || mc.player.hasStatusEffect(StatusEffects.BLINDNESS)
                         || mc.world.getBlockState(BlockPos.ofFloored(mc.player.getPos())).getBlock() == Blocks.COBWEB;
+                        || mc.player.hasStatusEffect(StatusEffects.FEATHER_FALLING)
 
         if (hitTicks > 0)
             return false;
