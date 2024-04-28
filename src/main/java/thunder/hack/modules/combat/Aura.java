@@ -384,7 +384,7 @@ public final class Aura extends Module {
                         || (mc.player.isFallFlying() || ModuleManager.elytraPlus.isEnabled())
                         || mc.player.hasStatusEffect(StatusEffects.BLINDNESS)
                         || mc.world.getBlockState(BlockPos.ofFloored(mc.player.getPos())).getBlock() == Blocks.COBWEB;
-                        || mc.player.hasStatusEffect(StatusEffects.FEATHER_FALLING)
+                        || mc.player.hasStatusEffect(StatusEffects.SLOW_FALLING)
 
         if (hitTicks > 0)
             return false;
