@@ -66,12 +66,12 @@ import static thunder.hack.utility.math.MathUtility.random;
 public final class Aura extends Module {
     public final Setting<Float> attackRange = new Setting<>("Range", 3.1f, 1f, 6.0f);
     public final Setting<Float> wallRange = new Setting<>("ThroughWallsRange", 3.1f, 0f, 6.0f);
-    public final Setting<Boolean> wallsBypass = new Setting<>("WallsBypass", false, v -> wallRange.getValue() > 0);
+    public final Setting<Boolean> wallsBypass = new Setting<>("IgnoreWallsBypass", false, v -> wallRange.getValue() > 0);
     public final Setting<Integer> fov = new Setting<>("FOV", 180, 1, 180);
     public final Setting<Mode> rotationMode = new Setting<>("RotationMode", Mode.Track);
     public final Setting<Integer> interactTicks = new Setting<>("InteractTicks", 3, 1, 10, v -> rotationMode.getValue() == Mode.Interact);
     public final Setting<Switch> switchMode = new Setting<>("AutoWeapon", Switch.None);
-    public final Setting<Boolean> onlyWeapon = new Setting<>("OnlyWeapon", false, v -> switchMode.getValue() != Switch.Silent);
+    public final Setting<Boolean> onlyWeapon = new Setting<>("OnlyWithWeapon", false, v -> switchMode.getValue() != Switch.Silent);
     public final Setting<BooleanParent> smartCrit = new Setting<>("SmartCrit", new BooleanParent(true));
     public final Setting<Boolean> onlySpace = new Setting<>("OnlyCrit", false).withParent(smartCrit);
     public final Setting<Boolean> autoJump = new Setting<>("AutoJump", false).withParent(smartCrit);
@@ -79,7 +79,7 @@ public final class Aura extends Module {
     public final Setting<Boolean> pauseWhileEating = new Setting<>("PauseWhileEating", false);
     public final Setting<Boolean> tpsSync = new Setting<>("TPSSync", false);
     public final Setting<Boolean> clientLook = new Setting<>("ClientLook", false);
-    public final Setting<BooleanParent> oldDelay = new Setting<>("OldDelay", new BooleanParent(false));
+    public final Setting<BooleanParent> oldDelay = new Setting<>("OldAttackDelay", new BooleanParent(false));
     public final Setting<Integer> minCPS = new Setting<>("MinCPS", 7, 1, 20).withParent(oldDelay);
     public final Setting<Integer> maxCPS = new Setting<>("MaxCPS", 12, 1, 20).withParent(oldDelay);
     public final Setting<ESP> esp = new Setting<>("ESP", ESP.ThunderHack);
@@ -97,7 +97,7 @@ public final class Aura extends Module {
     public final Setting<Boolean> grimRayTrace = new Setting<>("GrimRayTrace", true).withParent(advanced);
     public final Setting<Boolean> unpressShield = new Setting<>("UnpressShield", true).withParent(advanced);
     public final Setting<Boolean> deathDisable = new Setting<>("DisableOnDeath", true).withParent(advanced);
-    public final Setting<Boolean> tpDisable = new Setting<>("TPDisable", false).withParent(advanced);
+    public final Setting<Boolean> tpDisable = new Setting<>("DisableOnTP", false).withParent(advanced);
     public final Setting<Boolean> pullDown = new Setting<>("FastFall", false).withParent(advanced);
     public final Setting<Boolean> onlyJumpBoost = new Setting<>("OnlyJumpBoost", false, v-> pullDown.getValue()).withParent(advanced);
     public final Setting<Float> pullValue = new Setting<>("PullValue", 3f, 0f, 20f, v -> pullDown.getValue()).withParent(advanced);
@@ -127,11 +127,11 @@ public final class Aura extends Module {
     public final Setting<Boolean> hostiles = new Setting<>("Hostiles", true).withParent(targets);
     public final Setting<Boolean> onlyAngry = new Setting<>("OnlyAngryHostiles", true, v -> hostiles.getValue()).withParent(targets);
     public final Setting<Boolean> Projectiles = new Setting<>("Projectiles", true).withParent(targets);
-    public final Setting<Boolean> ignoreInvisible = new Setting<>("IgnoreInvisibleEntities", false).withParent(targets);
+    public final Setting<Boolean> ignoreInvisible = new Setting<>("IgnoreInvisible", false).withParent(targets);
     public final Setting<Boolean> ignoreTeam = new Setting<>("IgnoreTeam", false).withParent(targets);
     public final Setting<Boolean> ignoreCreative = new Setting<>("IgnoreCreative", true).withParent(targets);
     public final Setting<Boolean> ignoreNaked = new Setting<>("IgnoreNaked", false).withParent(targets);
-    public final Setting<Boolean> ignoreShield = new Setting<>("AttackShieldingEntities", true).withParent(targets);
+    public final Setting<Boolean> ignoreShield = new Setting<>("AttackShielding", true).withParent(targets);
 
 
     public static Entity target;
